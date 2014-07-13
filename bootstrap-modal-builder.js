@@ -49,10 +49,10 @@
 
   $.modal = function (options) {
     var modal = $($.modal.defaults.template)
-      , options = $.extend({}, $.modal.defaults, options)
-    modal.children('.modal-header')[options.header ? 'show' : 'hide']().children('h3').text(options.title)
-    modal.children('.modal-body').html(options.content)
-    modal.children('.modal-footer')[options.footer ? 'show' : 'hide']()
+      , options = $.extend({}, $.modal.defaults, options);
+    modal.find('.modal-header')[options.header ? 'show' : 'hide']().children('h3').text(options.title);
+    modal.find('.modal-body').html(options.content);
+    modal.find('.modal-footer')[options.footer ? 'show' : 'hide']();
 
     if (options.dispose) modal.on('hidden', disposeModal)
 
@@ -73,7 +73,7 @@
         , text: ""
         , close: false
       }
-    , template: '<div class="modal hide"><div class="modal-header"><button class="close" data-dismiss="modal">×</button><h3></h3></div><div class="modal-body"></div><div class="modal-footer"></div></div>'
+    , template: '<div class="modal fade" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button class="close" data-dismiss="modal">×</button><h3></h3></div><div class="modal-body"></div><div class="modal-footer"></div></div></div></div>'
     , dispose: true
     , footer: true
     , header: true
