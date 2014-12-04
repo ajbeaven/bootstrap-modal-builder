@@ -5,9 +5,16 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <title>Bootstrap modal builder by mungai</title>
 
+    <link rel="stylesheet" href="stylesheets/prettify.css">
+    <link rel="stylesheet" href="stylesheets/bootstrap.css">
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/jquery.js"></script>
     <script src="javascripts/scale.fix.js"></script>
+    <script src="javascripts/prettify.js"></script>
+    <script src="javascripts/bootstrap.js"></script>
+    <script src="bootstrap-modal-builder.js"></script>
+    <script src="javascripts/application.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -25,42 +32,178 @@
           <li><a class="buttons github" href="https://github.com/mungai/bootstrap-modal-builder">View On GitHub</a></li>
         </ul>
 
-        <p class="header">This project is maintained by <a class="header name" href="https://github.com/mungai">mungai</a></p>
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/kmungai">kmungai</a></p>
 
 
       </header>
       <section>
-        <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+    <div class="row">
+      <div class="span3">
+      <h1>Modal builder <small>Create modals without any static HTML placeholders</small></h1>
+        <p>This plugin allows you to create modals dynamically, without cluttering your source with static HTML for modals. Everything is created in JavaScript and fully customizable.</p>
+      </div>
+      <div class="span9">
+        <h2>Basic example</h2>
+        <div class="well" style="text-align: center">
+          <button class="btn btn-lg btn-primary" id="basic-example">Show modal</button>
+        </div>
+        <h2>Using bootstrap-modal-builder.js</h2>
+        <p>Code for the example above:</p>
+        <pre class="prettyprint lang-js">$.modal({
+  title: "Example title",
+  content: "Here's some important message you must read.",
+  buttons: [
+    {
+      text: "Roger that",
+      close: true,
+      classes: "btn-default"
+    }
+  ]
+}).modal('show');</pre>
+        <div class="alert alert-info">
+          <strong>Note:</strong> <code>$.modal()</code> returns the actual HTML node for created modal so you can chain it with Bootstrap's <code>.modal()</code> method to manipulate it.
+        </div>
+        <h2>Options</h2>
+        <table class="table table-bordered table-striped">
+          <thead>
+          <tr>
+            <th style="width: 100px;">Name</th>
+            <th style="width: 50px;">type</th>
+            <th style="width: 50px;">default</th>
+            <th>description</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>title</td>
+              <td>string</td>
+              <td>""</td>
+              <td>Title of the modal in <code>.modal-header</code>.</td>
+            </tr>
+            <tr>
+              <td>content</td>
+              <td>string</td>
+              <td>""</td>
+              <td>Content of the modal, can be a HTML string.</td>
+            </tr>
+            <tr>
+              <td>header</td>
+              <td>boolean</td>
+              <td>true</td>
+              <td>Display the <code>.modal-header</code>. If hidden, title and <code>.close</code> button are invisible</td>
+            </tr>
+            <tr>
+              <td>footer</td>
+              <td>boolean</td>
+              <td>true</td>
+              <td>Display the <code>.modal-footer</code>. Please note that when <code>false</code> buttons will also not appear.</td>
+            </tr>
+            <tr>
+              <td>dispose</td>
+              <td>boolean</td>
+              <td>true</td>
+              <td>Remove the actual HTML element with modal on close. Set to <code>false</code> if you want to reuse the same modal multiple times.</td>
+            </tr>
+            <tr>
+              <td>buttons</td>
+              <td>array</td>
+              <td>[ ]</td>
+              <td>List of buttons to create in the modal. See the table below for button specific options.</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2>Options for buttons</h2>
+        <p>These options apply to objects in <code>buttons</code> array.</p>
+        <table class="table table-bordered table-striped">
+          <thead>
+          <tr>
+            <th style="width: 100px;">Name</th>
+            <th style="width: 50px;">type</th>
+            <th style="width: 50px;">default</th>
+            <th>description</th>
+          </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>text</td>
+              <td>string</td>
+              <td>""</td>
+              <td>Text visible on the button.</td>
+            </tr>
+            <tr>
+              <td>href</td>
+              <td>string</td>
+              <td>"#"</td>
+              <td>Link used in the <code>href</code> attribute.</td>
+            </tr>
+            <tr>
+              <td>close</td>
+              <td>boolean</td>
+              <td>false</td>
+              <td>When <code>true</code>, pressing the button will also close the modal. Behind the scenes it adds <code>data-dismiss="modal"</code>.</td>
+            </tr>
+            <tr>
+              <td>classes</td>
+              <td>string</td>
+              <td>""</td>
+              <td>
+                List of classes applied to the button HTML tag. For example, if you want a button to be primary and large, set it to: <code>btn-primary btn-lg</code>.
+                <code>btn</code> class is applied by default so you don't have to add it here.
+              </td>
+            </tr>
+            <tr>
+              <td>html</td>
+              <td>string</td>
+              <td>""</td>
+              <td>Custom HTML for the button. Use it if your button tag needs more tweaking. Remember that the <code>text</code>, <code>href</code> and <code>classes</code> options take precedence and can still modify the custom HTML. For example additional <code>classes</code> will be appended to the custom element.</td>
+            </tr>
+            <tr>
+              <td>click</td>
+              <td>function</td>
+              <td>undefined</td>
+              <td>Callback function fired when a button is clicked.</td>
+            </tr>
+          </tbody>
+        </table>
+        <h2>Full example</h2>
+        <p>Method with all options possible:</p>
+        <pre class="prettyprint lang-js">$.modal({
+  title: "Full example title",
+  content: "&lt;p&gt;Rich content with some &lt;strong&gt;HTML&lt;/strong&gt; tags &lt;em&gt;here&lt;/em&gt; and &lt;u&gt;there&lt;/u&gt;&lt;/p&gt;",
+  header: true,
+  footer: true,
+  dispose: true,
+  buttons: [
+    {
+      text: "Yup, I got it",
+      href: "#",
+      classes: "btn-primary",
+      click: function(e) {
+        alert("Seriously, I got it!");
+      }
+    },
+    {
+      text: "Get me out of here",
+      href: "#",
+      classes: "btn-default",
+      close: true
+    },
+    {
+      html: "&lt;a href='#' data-dismiss='modal' class='btn btn-danger'&gt;Danger, custom button&lt;/a&gt;",
+      text: "Achtung!",
+      classes: "btn-lg",
+      click: function() {
+        alert("Custom  button");
+      }
+    }
+  ]
+}).modal('show');</pre>
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
-
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
-
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
-
-<h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
-
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
-
-<h3>
-<a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
-
-<p>If you prefer to not use the automatic generator, push a branch named <code>gh-pages</code> to your repository to create a page manually. In addition to supporting regular HTML content, GitHub Pages support Jekyll, a simple, blog aware static site generator written by our own Tom Preston-Werner. Jekyll makes it easy to create site-wide headers and footers without having to copy them across every page. It also offers intelligent blog support and other advanced templating features.</p>
-
-<h3>
-<a name="authors-and-contributors" class="anchor" href="#authors-and-contributors"><span class="octicon octicon-link"></span></a>Authors and Contributors</h3>
-
-<p>You can <a href="https://github.com/blog/821" class="user-mention">@mention</a> a GitHub username to generate a link to their profile. The resulting <code>&lt;a&gt;</code> element will link to the contributor's GitHub Profile. For example: In 2007, Chris Wanstrath (<a href="https://github.com/defunkt" class="user-mention">@defunkt</a>), PJ Hyett (<a href="https://github.com/pjhyett" class="user-mention">@pjhyett</a>), and Tom Preston-Werner (<a href="https://github.com/mojombo" class="user-mention">@mojombo</a>) founded GitHub.</p>
-
-<h3>
-<a name="support-or-contact" class="anchor" href="#support-or-contact"><span class="octicon octicon-link"></span></a>Support or Contact</h3>
-
-<p>Having trouble with Pages? Check out the documentation at <a href="http://help.github.com/pages">http://help.github.com/pages</a> or contact <a href="mailto:support@github.com">support@github.com</a> and we’ll help you sort it out.</p>
+        <div class="well" style="text-align: center">
+          <button class="btn btn-lg btn-danger" id="full-example">Show</button>
+        </div>
+      </div>
+    </div>
       </section>
       <footer>
         <p><small>Hosted on <a href="http://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
