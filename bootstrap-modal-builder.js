@@ -65,6 +65,7 @@
     modal.find('.modal-body').html(options.content);
     modal.find('.modal-footer')[options.footer ? 'show' : 'hide']();
 
+	if (options.id) modal.attr('id', options.id)
     if (options.dispose) modal.on('hide', disposeModal)
 
     if (options.footer && options.buttons) {
@@ -84,6 +85,7 @@
         , text: ""
         , close: false
       }
+    , id: ""
     , template: '<div class="modal fade" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button class="close" data-dismiss="modal">×</button><h3></h3></div><div class="modal-body"></div><div class="modal-footer"></div></div></div></div>'
     , dispose: true
     , footer: true
