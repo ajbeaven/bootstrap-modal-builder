@@ -59,8 +59,8 @@
    * ======================= */
 
   $.modal = function (options) {
-    var modal = $($.modal.defaults.template)
-      , options = $.extend({}, $.modal.defaults, options);
+  	var options = $.extend({}, $.modal.defaults, options),
+      modal = $(options.template);
     modal.find('.modal-header')[options.header ? 'show' : 'hide']().children('h3').text(options.title);
     modal.find('.modal-body').html(options.content);
     modal.find('.modal-footer')[options.footer ? 'show' : 'hide']();
