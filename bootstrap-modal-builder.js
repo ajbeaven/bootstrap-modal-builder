@@ -61,7 +61,7 @@
   $.modal = function (options) {
   	var options = $.extend({}, $.modal.defaults, options),
       modal = $(options.template);
-    modal.find('.modal-header')[options.header ? 'show' : 'hide']().children('h3').text(options.title);
+    modal.find('.modal-header')[options.header ? 'show' : 'hide']().children('.modal-title').text(options.title);
     modal.find('.modal-body').html(options.content);
     modal.find('.modal-footer')[options.footer ? 'show' : 'hide']();
 
@@ -86,7 +86,7 @@
         , close: false
       }
     , id: ""
-    , template: '<div class="modal fade" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button class="close" data-dismiss="modal">×</button><h3></h3></div><div class="modal-body"></div><div class="modal-footer"></div></div></div></div>'
+    , template: '<div class="modal fade" role="dialog" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button class="close" data-dismiss="modal">×</button><h4 class="modal-title"></h4></div><div class="modal-body"></div><div class="modal-footer"></div></div></div></div>'
     , dispose: true
     , footer: true
     , header: true
