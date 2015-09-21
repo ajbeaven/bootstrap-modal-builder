@@ -21,18 +21,6 @@
 
   "use strict";
 
-  /* Trigger hide event when $.hide() is called
-   */
-  (function ($) {
-      $.each(['show', 'hide'], function (i, ev) {
-      var el = $.fn[ev];
-          $.fn[ev] = function () {
-	      this.trigger(ev);
-	      return el.apply(this, arguments);
-         };
-      });
-  })($);	
-
   /* MODAL BUILDER PRIVATE METHODS
    * ===================== */
   function disposeModal(e) {
@@ -65,8 +53,8 @@
     modal.find('.modal-body').html(options.content);
     modal.find('.modal-footer')[options.footer ? 'show' : 'hide']();
 
-	if (options.id) modal.attr('id', options.id)
-    if (options.dispose) modal.on('hide', disposeModal)
+    if (options.id) modal.attr('id', options.id)
+    if (options.dispose) modal.on('hidden.bs.modal', disposeModal)
 
     if (options.footer && options.buttons) {
       var footer = modal.find('.modal-footer')
