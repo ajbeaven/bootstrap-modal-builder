@@ -54,6 +54,7 @@
     modal.find('.modal-footer')[options.footer ? 'show' : 'hide']();
 
     if (options.id) modal.attr('id', options.id)
+    if (options.className) modal.addClass(options.className)
     if (options.dispose) modal.on('hidden.bs.modal', disposeModal)
 
     if (options.footer && options.buttons) {
@@ -74,6 +75,7 @@
         , close: false
       }
     , id: ""
+    , className: ""
     , template: '<div class="modal fade" role="dialog" aria-hidden="true"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><button class="close" data-dismiss="modal">×</button><h4 class="modal-title"></h4></div><div class="modal-body"></div><div class="modal-footer"></div></div></div></div>'
     , dispose: true
     , footer: true
